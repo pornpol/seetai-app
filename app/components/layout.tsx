@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import type { Role } from "@prisma/client";
+import { useLoaderData } from "@remix-run/react";
 
 type Props = {
   children: React.ReactNode;
 };
 
 export const Layout: React.FC<Props> = ({ children }) => {
+  const user = useLoaderData();
+  console.log("user", user);
+
   const [show, setShow] = useState(false);
   const [profile, setProfile] = useState(false);
   // const [menu, setMenu] = useState(false);
@@ -18,8 +23,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
       <div className="w-full h-full bg-gray-200">
         <div className="flex flex-no-wrap">
           {/* Sidebar starts */}
-          <div className="absolute lg:relative w-64 h-screen shadow bg-gray-100 hidden lg:block">
-            <div className="h-16 w-full flex items-center px-4">
+          <div className="absolute hidden w-64 h-screen bg-gray-100 shadow lg:relative lg:block">
+            <div className="flex items-center w-full h-16 px-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
@@ -52,9 +57,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </text>
               </svg>
             </div>
-            <ul aria-orientation="vertical" className=" py-6">
+            <ul aria-orientation="vertical" className="py-6 ">
               <NavLink to={"/"}>
-                <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                <li className="pt-5 pb-4 pl-6 text-sm leading-3 tracking-normal text-white text-indigo-700 cursor-pointer focus:text-indigo-700 focus:outline-none">
                   <div className="flex items-center">
                     <div>
                       <svg
@@ -81,7 +86,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </li>
               </NavLink>
               <NavLink to={"/orders"}>
-                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                <li className="py-2 pl-6 mt-4 mb-4 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                   <div className="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +107,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                   </div>
                 </li>
               </NavLink>
-              <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+              <li className="py-2 pl-6 mb-4 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                 <div className="flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +129,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </div>
               </li>
               <NavLink to={"/auth/login"}>
-                <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                <li className="py-2 pl-6 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                   <div className="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -159,14 +164,14 @@ export const Layout: React.FC<Props> = ({ children }) => {
             id="mobile-nav"
           >
             <div
-              className="bg-gray-800 opacity-50 absolute h-full w-full lg:hidden"
+              className="absolute w-full h-full bg-gray-800 opacity-50 lg:hidden"
               onClick={() => setShow(!show)}
             />
-            <div className="absolute z-40 sm:relative w-64 md:w-96 shadow pb-4 bg-gray-100 lg:hidden transition duration-150 ease-in-out h-full">
-              <div className="flex flex-col justify-between h-full w-full">
+            <div className="absolute z-40 w-64 h-full pb-4 transition duration-150 ease-in-out bg-gray-100 shadow sm:relative md:w-96 lg:hidden">
+              <div className="flex flex-col justify-between w-full h-full">
                 <div>
                   <div className="flex items-center justify-between px-8">
-                    <div className="h-16 w-full flex items-center">
+                    <div className="flex items-center w-full h-16">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={144}
@@ -181,7 +186,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     </div>
                     <div
                       id="closeSideBar"
-                      className="flex items-center justify-center h-10 w-10"
+                      className="flex items-center justify-center w-10 h-10"
                       onClick={() => setShow(!show)}
                     >
                       <svg
@@ -202,8 +207,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       </svg>
                     </div>
                   </div>
-                  <ul aria-orientation="vertical" className=" py-6">
-                    <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                  <ul aria-orientation="vertical" className="py-6 ">
+                    <li className="pt-5 pb-4 pl-6 text-sm leading-3 tracking-normal text-white text-indigo-700 cursor-pointer focus:text-indigo-700 focus:outline-none">
                       <div className="flex items-center">
                         <div className="w-6 h-6 md:w-8 md:h-8">
                           <svg
@@ -223,12 +228,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <rect x={14} y={14} width={6} height={6} rx={1} />
                           </svg>
                         </div>
-                        <span className="ml-2 xl:text-base md:text-2xl text-base">
+                        <span className="ml-2 text-base xl:text-base md:text-2xl">
                           Dashboard
                         </span>
                       </div>
                     </li>
-                    <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                    <li className="py-2 pl-6 mt-4 mb-4 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                       <div className="flex items-center">
                         <div className="w-6 h-6 md:w-8 md:h-8">
                           <svg
@@ -245,12 +250,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
                           </svg>
                         </div>
-                        <span className="ml-2 xl:text-base md:text-2xl text-base">
+                        <span className="ml-2 text-base xl:text-base md:text-2xl">
                           Products
                         </span>
                       </div>
                     </li>
-                    <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                    <li className="py-2 pl-6 mb-4 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                       <div className="flex items-center">
                         <div className="w-6 h-6 md:w-8 md:h-8">
                           <svg
@@ -268,12 +273,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <circle cx={12} cy={12} r={9} />
                           </svg>
                         </div>
-                        <span className="ml-2 xl:text-base md:text-2xl text-base">
+                        <span className="ml-2 text-base xl:text-base md:text-2xl">
                           Performance
                         </span>
                       </div>
                     </li>
-                    <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                    <li className="py-2 pl-6 text-sm leading-3 tracking-normal text-gray-600 cursor-pointer hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                       <div className="flex items-center">
                         <div className="w-6 h-6 md:w-8 md:h-8">
                           <svg
@@ -292,7 +297,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <line x1={14} y1={4} x2={10} y2={20} />
                           </svg>
                         </div>
-                        <span className="ml-2 xl:text-base md:text-2xl text-base">
+                        <span className="ml-2 text-base xl:text-base md:text-2xl">
                           Deliverables
                         </span>
                       </div>
@@ -300,9 +305,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
                   </ul>
                 </div>
                 <div className="w-full">
-                  <div className="flex justify-center mb-4 w-full px-6">
+                  <div className="flex justify-center w-full px-6 mb-4">
                     <div className="relative w-full">
-                      <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
+                      <div className="absolute inset-0 w-4 h-4 m-auto ml-4 text-gray-500">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-search"
@@ -321,26 +326,26 @@ export const Layout: React.FC<Props> = ({ children }) => {
                         </svg>
                       </div>
                       <input
-                        className="bg-gray-200 focus:outline-none rounded w-full text-sm text-gray-500  pl-10 py-2"
+                        className="w-full py-2 pl-10 text-sm text-gray-500 bg-gray-200 rounded focus:outline-none"
                         type="text"
                         placeholder="Search"
                       />
                     </div>
                   </div>
                   <div className="border-t border-gray-300">
-                    <div className="w-full flex items-center justify-between px-6 pt-1">
+                    <div className="flex items-center justify-between w-full px-6 pt-1">
                       <div className="flex items-center">
                         <img
                           alt="profile-pic"
                           src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png"
                           className="w-8 h-8 rounded-md"
                         />
-                        <p className="md:text-xl text-gray-800 text-base leading-4 ml-2">
+                        <p className="ml-2 text-base leading-4 text-gray-800 md:text-xl">
                           Jane Doe
                         </p>
                       </div>
                       <ul className="flex">
-                        <li className="cursor-pointer text-white pt-5 pb-3">
+                        <li className="pt-5 pb-3 text-white cursor-pointer">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-messages"
@@ -358,7 +363,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
                           </svg>
                         </li>
-                        <li className="cursor-pointer text-white pt-5 pb-3 pl-3">
+                        <li className="pt-5 pb-3 pl-3 text-white cursor-pointer">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-bell"
@@ -387,11 +392,11 @@ export const Layout: React.FC<Props> = ({ children }) => {
           {/* Sidebar ends */}
           <div className="w-full">
             {/* Navigation starts */}
-            <nav className="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
-              <div className="hidden lg:flex w-full pr-6">
-                <div className="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
+            <nav className="relative z-10 flex items-center justify-end h-16 bg-white shadow lg:items-stretch lg:justify-between">
+              <div className="hidden w-full pr-6 lg:flex">
+                <div className="items-center hidden w-1/2 h-full pl-6 pr-24 lg:flex">
                   <div className="relative w-full">
-                    <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
+                    <div className="absolute inset-0 w-4 h-4 m-auto ml-4 text-gray-500">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-search"
@@ -410,16 +415,16 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       </svg>
                     </div>
                     <input
-                      className="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-500 bg-gray-100 pl-12 py-2"
+                      className="w-full py-2 pl-12 text-sm text-gray-500 bg-gray-100 border border-gray-100 rounded focus:outline-none focus:border-indigo-700"
                       type="text"
                       placeholder="Search"
                     />
                   </div>
                 </div>
-                <div className="w-1/2 hidden lg:flex">
-                  <div className="w-full flex items-center pl-8 justify-end">
-                    <div className="h-full w-20 flex items-center justify-center border-r border-l">
-                      <div className="relative cursor-pointer text-gray-600">
+                <div className="hidden w-1/2 lg:flex">
+                  <div className="flex items-center justify-end w-full pl-8">
+                    <div className="flex items-center justify-center w-20 h-full border-l border-r">
+                      <div className="relative text-gray-600 cursor-pointer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-bell"
@@ -436,10 +441,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                           <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
                           <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
                         </svg>
-                        <div className="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto" />
+                        <div className="absolute inset-0 w-2 h-2 m-auto mt-1 mr-1 bg-red-400 border border-white rounded-full" />
                       </div>
                     </div>
-                    <div className="h-full w-20 flex items-center justify-center border-r mr-4 cursor-pointer text-gray-600">
+                    <div className="flex items-center justify-center w-20 h-full mr-4 text-gray-600 border-r cursor-pointer">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-messages"
@@ -458,13 +463,13 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       </svg>
                     </div>
                     <div
-                      className="flex items-center relative cursor-pointer"
+                      className="relative flex items-center cursor-pointer"
                       onClick={() => setProfile(!profile)}
                     >
                       <div className="rounded-full">
                         {profile ? (
-                          <ul className="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 ">
-                            <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
+                          <ul className="absolute left-0 w-full p-2 mt-12 bg-white border-r rounded shadow sm:mt-16 ">
+                            <li className="flex items-center justify-between w-full text-gray-600 cursor-pointer hover:text-indigo-700">
                               <div className="flex items-center">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -482,10 +487,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                                   <circle cx={12} cy={7} r={4} />
                                   <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                 </svg>
-                                <span className="text-sm ml-2">My Profile</span>
+                                <span className="ml-2 text-sm">My Profile</span>
                               </div>
                             </li>
-                            <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                            <li className="flex items-center justify-between w-full mt-2 text-gray-600 cursor-pointer hover:text-indigo-700">
                               <div className="flex items-center">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -503,7 +508,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                                   <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                                   <path d="M7 12h14l-3 -3m0 6l3 -3" />
                                 </svg>
-                                <span className="text-sm ml-2">Sign out</span>
+                                <span className="ml-2 text-sm">Sign out</span>
                               </div>
                             </li>
                           </ul>
@@ -512,15 +517,15 @@ export const Layout: React.FC<Props> = ({ children }) => {
                         )}
                         <div className="relative">
                           <img
-                            className="rounded-full h-10 w-10 object-cover"
+                            className="object-cover w-10 h-10 rounded-full"
                             src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png"
                             alt="avatar"
                           />
-                          <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
+                          <div className="absolute inset-0 w-2 h-2 m-auto mb-0 mr-0 bg-green-400 border border-white rounded-full" />
                         </div>
                       </div>
-                      <p className="text-gray-800 text-sm mx-3">Jane Doe</p>
-                      <div className="cursor-pointer text-gray-600">
+                      <p className="mx-3 text-sm text-gray-800">Jane Doe</p>
+                      <div className="text-gray-600 cursor-pointer">
                         <svg
                           aria-haspopup="true"
                           xmlns="http://www.w3.org/2000/svg"
@@ -543,7 +548,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </div>
               </div>
               <div
-                className="text-gray-600 mr-8 visible lg:hidden relative"
+                className="relative visible mr-8 text-gray-600 lg:hidden"
                 onClick={() => setShow(!show)}
               >
                 {show ? (
@@ -553,7 +558,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     aria-label="Main Menu"
                     aria-haspopup="true"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-menu cursor-pointer"
+                    className="cursor-pointer icon icon-tabler icon-tabler-menu"
                     width={30}
                     height={30}
                     viewBox="0 0 24 24"
@@ -572,7 +577,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             </nav>
             {/* Navigation ends */}
             {/* Remove class [ h-64 ] when adding a card block */}
-            <div className="container mx-auto py-10 h-64 w-11/12 px-6">
+            <div className="container w-11/12 h-64 px-6 py-10 mx-auto">
               {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
               {children}
             </div>

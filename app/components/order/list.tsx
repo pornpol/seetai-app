@@ -1,0 +1,130 @@
+import { useState } from "react";
+
+import { BsGrid, BsList, BsSearch } from "react-icons/bs";
+
+import OrderItemRow from "./item/row";
+import OrderItemGrid from "./item/grid";
+
+enum DisplayStyle {
+  ROW = "row",
+  GRID = "grid",
+}
+
+type Props = {
+  orders: any[]; // FIXME:
+};
+
+const OrderList: React.FC<Props> = ({ orders }) => {
+  const displayStyle: DisplayStyle = DisplayStyle.GRID;
+  const [style, setStyle] = useState(displayStyle);
+
+  return (
+    <div>
+      {/* component */}
+      <div className="w-full p-8 bg-white rounded-md">
+        <div className="flex flex-col items-center justify-between pb-6 md:flex-row">
+          <div className="w-full">
+            <h2 className="font-semibold text-gray-600">Orders</h2>
+            <span className="text-xs">All orders</span>
+          </div>
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            <div className="flex items-center w-full p-2 rounded-md bg-gray-50">
+              <BsSearch className="w-4 h-4 text-gray-400" />
+              <input
+                className="block ml-1 outline-none bg-gray-50 "
+                type="text"
+                name="search"
+                id="search"
+                placeholder="search..."
+              />
+            </div>
+            <div className="flex w-full ml-5 space-x-8 lg:ml-40">
+              <button className="px-4 py-2 font-semibold tracking-wide text-white bg-indigo-600 rounded-md cursor-pointer">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+            <div className="flex justify-end my-2">
+              <div className="inline-flex items-center rounded-md shadow-sm">
+                <button
+                  onClick={() => setStyle(DisplayStyle.GRID)}
+                  className="inline-flex items-center px-4 py-2 space-x-1 text-sm font-medium bg-white border rounded-l-lg text-slate-800 hover:text-blue-600 hover:bg-slate-100 border-slate-200"
+                >
+                  <span>
+                    <BsGrid />
+                  </span>
+                  <span>Grid</span>
+                </button>
+                <button
+                  onClick={() => setStyle(DisplayStyle.ROW)}
+                  className="inline-flex items-center px-4 py-2 space-x-1 text-sm font-medium bg-white border rounded-r-lg text-slate-800 hover:text-blue-600 hover:bg-slate-100 border-slate-200"
+                >
+                  <span>
+                    <BsList />
+                  </span>
+                  <span>Row</span>
+                </button>
+              </div>
+            </div>
+            {style === DisplayStyle.GRID && (
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+                {orders.map((item) => (
+                  <OrderItemGrid key={item.id} item={item} />
+                ))}
+              </div>
+            )}
+            {style === DisplayStyle.ROW && (
+              <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
+                <table className="min-w-full leading-normal">
+                  <thead>
+                    <tr>
+                      <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                        Name
+                      </th>
+                      <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                        products
+                      </th>
+                      <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                        Created at
+                      </th>
+                      <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                        QRT
+                      </th>
+                      <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((item) => (
+                      <OrderItemRow key={item.id} item={item} />
+                    ))}
+                  </tbody>
+                </table>
+                <div className="flex flex-col items-center px-5 py-5 bg-white border-t xs:flex-row xs:justify-between ">
+                  <span className="text-xs text-gray-900 xs:text-sm">
+                    Showing 1 to 4 of 50 Entries
+                  </span>
+                  <div className="inline-flex mt-2 xs:mt-0">
+                    <button className="px-4 py-2 text-sm font-semibold transition duration-150 bg-indigo-600 rounded-l text-indigo-50 hover:bg-indigo-500">
+                      Prev
+                    </button>
+                    &nbsp; &nbsp;
+                    <button className="px-4 py-2 text-sm font-semibold transition duration-150 bg-indigo-600 rounded-r text-indigo-50 hover:bg-indigo-500">
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OrderList;

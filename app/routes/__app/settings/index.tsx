@@ -1,5 +1,5 @@
 import Table from "~/components/table";
 
-export default function UsersPage() {
+export default function SettingsPage() {
   return <main>{/* <Table /> */}</main>;
 }

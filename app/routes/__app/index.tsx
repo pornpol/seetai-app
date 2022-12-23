@@ -1,19 +1,21 @@
+import { useLoaderData } from "@remix-run/react";
+
 export default function IndexPage() {
   return (
     <main>
-      <div className="pt-6 px-4">
-        <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+      {/* <div className="px-4 pt-6">
+        <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 2xl:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <div className="flex-shrink-0">
-                <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">
                   $45,385
                 </span>
                 <h3 className="text-base font-normal text-gray-500">
                   Sales this week
                 </h3>
               </div>
-              <div className="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
+              <div className="flex items-center justify-end flex-1 text-base font-bold text-green-500">
                 12.5%
                 <svg
                   className="w-5 h-5"
@@ -31,10 +33,10 @@ export default function IndexPage() {
             </div>
             <div id="main-chart" />
           </div>
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <div className="mb-4 flex items-center justify-between">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 ">
+            <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="mb-2 text-xl font-bold text-gray-900">
                   Latest Transactions
                 </h3>
                 <span className="text-base font-normal text-gray-500">
@@ -44,7 +46,7 @@ export default function IndexPage() {
               <div className="flex-shrink-0">
                 <a
                   href="#"
-                  className="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2"
+                  className="p-2 text-sm font-medium rounded-lg text-cyan-600 hover:bg-gray-100"
                 >
                   View all
                 </a>
@@ -52,26 +54,26 @@ export default function IndexPage() {
             </div>
             <div className="flex flex-col mt-8">
               <div className="overflow-x-auto rounded-lg">
-                <div className="align-middle inline-block min-w-full">
-                  <div className="shadow overflow-hidden sm:rounded-lg">
+                <div className="inline-block min-w-full align-middle">
+                  <div className="overflow-hidden shadow sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
                         <tr>
                           <th
                             scope="col"
-                            className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                           >
                             Transaction
                           </th>
                           <th
                             scope="col"
-                            className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                           >
                             Date &amp; Time
                           </th>
                           <th
                             scope="col"
-                            className="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                           >
                             Amount
                           </th>
@@ -79,88 +81,88 @@ export default function IndexPage() {
                       </thead>
                       <tbody className="bg-white">
                         <tr>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                          <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
                             Payment from{" "}
                             <span className="font-semibold">Bonnie Green</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 23 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $2300
                           </td>
                         </tr>
                         <tr className="bg-gray-50">
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
+                          <td className="p-4 text-sm font-normal text-gray-900 rounded-lg whitespace-nowrap rounded-left">
                             Payment refund to{" "}
                             <span className="font-semibold">#00910</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 23 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             -$670
                           </td>
                         </tr>
                         <tr>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                          <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
                             Payment failed from{" "}
                             <span className="font-semibold">#087651</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 18 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $234
                           </td>
                         </tr>
                         <tr className="bg-gray-50">
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
+                          <td className="p-4 text-sm font-normal text-gray-900 rounded-lg whitespace-nowrap rounded-left">
                             Payment from{" "}
                             <span className="font-semibold">Lana Byrd</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 15 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $5000
                           </td>
                         </tr>
                         <tr>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                          <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
                             Payment from{" "}
                             <span className="font-semibold">Jese Leos</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 15 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $2300
                           </td>
                         </tr>
                         <tr className="bg-gray-50">
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
+                          <td className="p-4 text-sm font-normal text-gray-900 rounded-lg whitespace-nowrap rounded-left">
                             Payment from{" "}
                             <span className="font-semibold">
                               THEMESBERG LLC
                             </span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 11 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $560
                           </td>
                         </tr>
                         <tr>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                          <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
                             Payment from{" "}
                             <span className="font-semibold">Lana Lysle</span>
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                             Apr 6 ,2021
                           </td>
-                          <td className="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
                             $1437
                           </td>
                         </tr>
@@ -172,18 +174,18 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-        <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+        <div className="grid w-full grid-cols-1 gap-4 mt-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 ">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">
                   2,340
                 </span>
                 <h3 className="text-base font-normal text-gray-500">
                   New products this week
                 </h3>
               </div>
-              <div className="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
+              <div className="flex items-center justify-end flex-1 w-0 ml-5 text-base font-bold text-green-500">
                 14.6%
                 <svg
                   className="w-5 h-5"
@@ -200,17 +202,17 @@ export default function IndexPage() {
               </div>
             </div>
           </div>
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 ">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">
                   5,355
                 </span>
                 <h3 className="text-base font-normal text-gray-500">
                   Visitors this week
                 </h3>
               </div>
-              <div className="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
+              <div className="flex items-center justify-end flex-1 w-0 ml-5 text-base font-bold text-green-500">
                 32.9%
                 <svg
                   className="w-5 h-5"
@@ -227,17 +229,17 @@ export default function IndexPage() {
               </div>
             </div>
           </div>
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 ">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
+                <span className="text-2xl font-bold leading-none text-gray-900 sm:text-3xl">
                   385
                 </span>
                 <h3 className="text-base font-normal text-gray-500">
                   User signups this week
                 </h3>
               </div>
-              <div className="ml-5 w-0 flex items-center justify-end flex-1 text-red-500 text-base font-bold">
+              <div className="flex items-center justify-end flex-1 w-0 ml-5 text-base font-bold text-red-500">
                 -2.7%
                 <svg
                   className="w-5 h-5"
@@ -255,15 +257,15 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 2xl:grid-cols-2 xl:gap-4 my-4">
-          <div className="bg-white shadow rounded-lg mb-4 p-4 sm:p-6 h-full">
+        <div className="grid grid-cols-1 my-4 2xl:grid-cols-2 xl:gap-4">
+          <div className="h-full p-4 mb-4 bg-white rounded-lg shadow sm:p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold leading-none text-gray-900">
                 Latest Customers
               </h3>
               <a
                 href="#"
-                className="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2"
+                className="inline-flex items-center p-2 text-sm font-medium rounded-lg text-cyan-600 hover:bg-gray-100"
               >
                 View all
               </a>
@@ -274,7 +276,7 @@ export default function IndexPage() {
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://demo.themesberg.com/windster/images/users/neil-sims.png"
                         alt="Neil image"
                       />
@@ -302,7 +304,7 @@ export default function IndexPage() {
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://demo.themesberg.com/windster/images/users/bonnie-green.png"
                         alt="Neil image"
                       />
@@ -330,7 +332,7 @@ export default function IndexPage() {
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://demo.themesberg.com/windster/images/users/michael-gough.png"
                         alt="Neil image"
                       />
@@ -358,7 +360,7 @@ export default function IndexPage() {
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://demo.themesberg.com/windster/images/users/thomas-lean.png"
                         alt="Neil image"
                       />
@@ -382,11 +384,11 @@ export default function IndexPage() {
                     </div>
                   </div>
                 </li>
-                <li className="pt-3 sm:pt-4 pb-0">
+                <li className="pt-3 pb-0 sm:pt-4">
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src="https://demo.themesberg.com/windster/images/users/lana-byrd.png"
                         alt="Neil image"
                       />
@@ -413,38 +415,38 @@ export default function IndexPage() {
               </ul>
             </div>
           </div>
-          <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <h3 className="text-xl leading-none font-bold text-gray-900 mb-10">
+          <div className="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 ">
+            <h3 className="mb-10 text-xl font-bold leading-none text-gray-900">
               Acquisition Overview
             </h3>
             <div className="block w-full overflow-x-auto">
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
                   <tr>
-                    <th className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    <th className="px-4 py-3 text-xs font-semibold text-left text-gray-700 uppercase align-middle border-l-0 border-r-0 bg-gray-50 whitespace-nowrap">
                       Top Channels
                     </th>
-                    <th className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    <th className="px-4 py-3 text-xs font-semibold text-left text-gray-700 uppercase align-middle border-l-0 border-r-0 bg-gray-50 whitespace-nowrap">
                       Users
                     </th>
-                    <th className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px" />
+                    <th className="px-4 py-3 text-xs font-semibold text-left text-gray-700 uppercase align-middle border-l-0 border-r-0 bg-gray-50 whitespace-nowrap min-w-140-px" />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   <tr className="text-gray-500">
-                    <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                    <th className="p-4 px-4 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Organic Search
                     </th>
-                    <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       5,649
                     </td>
-                    <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">30%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-cyan-600 h-2 rounded-sm"
+                              className="h-2 rounded-sm bg-cyan-600"
                               style={{ width: "30%" }}
                             />
                           </div>
@@ -453,19 +455,19 @@ export default function IndexPage() {
                     </td>
                   </tr>
                   <tr className="text-gray-500">
-                    <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                    <th className="p-4 px-4 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Referral
                     </th>
-                    <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       4,025
                     </td>
-                    <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">24%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-orange-300 h-2 rounded-sm"
+                              className="h-2 bg-orange-300 rounded-sm"
                               style={{ width: "24%" }}
                             />
                           </div>
@@ -474,19 +476,19 @@ export default function IndexPage() {
                     </td>
                   </tr>
                   <tr className="text-gray-500">
-                    <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                    <th className="p-4 px-4 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Direct
                     </th>
-                    <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       3,105
                     </td>
-                    <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">18%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-teal-400 h-2 rounded-sm"
+                              className="h-2 bg-teal-400 rounded-sm"
                               style={{ width: "18%" }}
                             />
                           </div>
@@ -495,19 +497,19 @@ export default function IndexPage() {
                     </td>
                   </tr>
                   <tr className="text-gray-500">
-                    <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                    <th className="p-4 px-4 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Social
                     </th>
-                    <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       1251
                     </td>
-                    <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">12%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-pink-600 h-2 rounded-sm"
+                              className="h-2 bg-pink-600 rounded-sm"
                               style={{ width: "12%" }}
                             />
                           </div>
@@ -516,19 +518,19 @@ export default function IndexPage() {
                     </td>
                   </tr>
                   <tr className="text-gray-500">
-                    <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                    <th className="p-4 px-4 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Other
                     </th>
-                    <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       734
                     </td>
-                    <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
+                    <td className="p-4 px-4 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">9%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-indigo-600 h-2 rounded-sm"
+                              className="h-2 bg-indigo-600 rounded-sm"
                               style={{ width: "9%" }}
                             />
                           </div>
@@ -537,19 +539,19 @@ export default function IndexPage() {
                     </td>
                   </tr>
                   <tr className="text-gray-500">
-                    <th className="border-t-0 align-middle text-sm font-normal whitespace-nowrap p-4 pb-0 text-left">
+                    <th className="p-4 pb-0 text-sm font-normal text-left align-middle border-t-0 whitespace-nowrap">
                       Email
                     </th>
-                    <td className="border-t-0 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 pb-0">
+                    <td className="p-4 pb-0 text-xs font-medium text-gray-900 align-middle border-t-0 whitespace-nowrap">
                       456
                     </td>
-                    <td className="border-t-0 align-middle text-xs whitespace-nowrap p-4 pb-0">
+                    <td className="p-4 pb-0 text-xs align-middle border-t-0 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="mr-2 text-xs font-medium">7%</span>
                         <div className="relative w-full">
-                          <div className="w-full bg-gray-200 rounded-sm h-2">
+                          <div className="w-full h-2 bg-gray-200 rounded-sm">
                             <div
-                              className="bg-purple-500 h-2 rounded-sm"
+                              className="h-2 bg-purple-500 rounded-sm"
                               style={{ width: "7%" }}
                             />
                           </div>
@@ -562,7 +564,7 @@ export default function IndexPage() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }

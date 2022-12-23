@@ -1,9 +1,5 @@
 import Table from "~/components/table";
 
-export default function ProductsPage() {
-  return (
-    <main>
-      <Table />
-    </main>
-  );
+export default function ReportsPage() {
+  return <main>{/* <Table /> */}</main>;
 }

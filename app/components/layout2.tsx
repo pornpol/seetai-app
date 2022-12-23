@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import type { UserInterface } from "~/data/auth.server";
 
 type Props = {
   children: React.ReactNode;
+  user: UserInterface;
 };
 
-export const Layout: React.FC<Props> = ({ children }) => {
+export const Layout: React.FC<Props> = ({ children, user }) => {
   const [show, setShow] = useState(false);
   const [profile, setProfile] = useState(false);
 
@@ -14,7 +16,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
       {/* component */}
       {/* This is an example component */}
       <div>
-        <nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
+        <nav className="fixed z-30 w-full bg-white border-b border-gray-200">
           <div className="px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center justify-start">
@@ -23,7 +25,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                   aria-expanded="true"
                   aria-controls="sidebar"
                   onClick={() => setShow(!show)}
-                  className="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
+                  className="p-2 mr-2 text-gray-600 rounded cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100"
                 >
                   <svg
                     id="toggleSidebarMobileHamburger"
@@ -38,9 +40,9 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <svg
+                  {/* <svg
                     id="toggleSidebarMobileClose"
-                    className="w-6 h-6 hidden"
+                    className="hidden w-6 h-6"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +52,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                       clipRule="evenodd"
                     />
-                  </svg>
+                  </svg> */}
                 </button>
                 <Link
                   to="/"
@@ -61,7 +63,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     SEETAI DIAMOND
                   </span>
                 </Link>
-                <form
+                {/* <form
                   action="#"
                   method="GET"
                   className="hidden lg:block lg:pl-8"
@@ -69,8 +71,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
                   <label htmlFor="topbar-search" className="sr-only">
                     Search
                   </label>
-                  <div className="mt-1 relative lg:w-64">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="relative mt-1 lg:w-64">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <svg
                         className="w-5 h-5 text-gray-500"
                         fill="currentColor"
@@ -92,13 +94,13 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       placeholder="Search"
                     />
                   </div>
-                </form>
+                </form> */}
               </div>
               <div className="flex items-center">
-                <button
+                {/* <button
                   id="toggleSidebarMobileSearch"
                   type="button"
-                  className="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg"
+                  className="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100"
                 >
                   <span className="sr-only">Search</span>
                   <svg
@@ -113,15 +115,15 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </button> */}
                 <div
-                  className="flex items-center relative cursor-pointer"
+                  className="relative flex items-center cursor-pointer"
                   onClick={() => setProfile(!profile)}
                 >
                   <div className="rounded-full">
                     {profile ? (
-                      <ul className="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 ">
-                        <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
+                      <ul className="absolute left-0 w-full p-2 mt-12 bg-white border-r rounded shadow sm:mt-16 ">
+                        <li className="flex items-center justify-between w-full text-gray-600 cursor-pointer hover:text-indigo-700">
                           <div className="flex items-center">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -139,11 +141,11 @@ export const Layout: React.FC<Props> = ({ children }) => {
                               <circle cx={12} cy={7} r={4} />
                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                             </svg>
-                            <span className="text-sm ml-2">My Profile</span>
+                            <span className="ml-2 text-sm">My Profile</span>
                           </div>
                         </li>
-                        <Link to="/auth/login">
-                          <li className="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+                        <Link to="/auth/logout">
+                          <li className="flex items-center justify-between w-full mt-2 text-gray-600 cursor-pointer hover:text-indigo-700">
                             <div className="flex items-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +163,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                                 <path d="M7 12h14l-3 -3m0 6l3 -3" />
                               </svg>
-                              <span className="text-sm ml-2">Sign out</span>
+                              <span className="ml-2 text-sm">Sign out</span>
                             </div>
                           </li>
                         </Link>
@@ -171,15 +173,15 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     )}
                     <div className="relative">
                       <img
-                        className="rounded-full h-10 w-10 object-cover"
+                        className="object-cover w-10 h-10 rounded-full"
                         src="https://tuk-cdn.s3.amazonaws.com/assets/components/sidebar_layout/sl_1.png"
                         alt="avatar"
                       />
-                      <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
+                      <div className="absolute inset-0 w-2 h-2 m-auto mb-0 mr-0 bg-green-400 border border-white rounded-full" />
                     </div>
                   </div>
-                  <p className="text-gray-800 text-sm mx-3">Jane Doe</p>
-                  <div className="cursor-pointer text-gray-600">
+                  <p className="mx-3 text-sm text-gray-800">{user.name}</p>
+                  <div className="text-gray-600 cursor-pointer">
                     <svg
                       aria-haspopup="true"
                       xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +204,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             </div>
           </div>
         </nav>
-        <div className="flex overflow-hidden bg-white pt-16">
+        <div className="flex pt-16 overflow-hidden bg-white">
           <aside
             id="sidebar"
             className={
@@ -213,17 +215,17 @@ export const Layout: React.FC<Props> = ({ children }) => {
             aria-label="Sidebar"
             onClick={() => setShow(false)}
           >
-            <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
-              <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <div className="flex-1 px-3 bg-white divide-y space-y-1">
-                  <ul className="space-y-2 pb-2">
+            <div className="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200">
+              <div className="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
+                <div className="flex-1 px-3 space-y-1 bg-white divide-y">
+                  <ul className="pb-2 space-y-2">
                     <li>
                       <form action="#" method="GET" className="lg:hidden">
                         <label htmlFor="mobile-search" className="sr-only">
                           Search
                         </label>
                         <div className="relative">
-                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg
                               className="w-5 h-5 text-gray-500"
                               fill="currentColor"
@@ -246,10 +248,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     <li>
                       <Link
                         to="/"
-                        className="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
+                        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
                       >
                         <svg
-                          className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75"
+                          className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -263,20 +265,20 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     <li>
                       <Link
                         to="/orders"
-                        className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group "
+                        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group "
                       >
                         <svg
-                          className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                          className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                         </svg>
-                        <span className="ml-3 flex-1 whitespace-nowrap">
+                        <span className="flex-1 ml-3 whitespace-nowrap">
                           Orders
                         </span>
-                        {/* <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
+                        {/* <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full">
                           Pro
                         </span> */}
                       </Link>
@@ -284,10 +286,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     <li>
                       <Link
                         to="/reports"
-                        className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group "
+                        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group "
                       >
                         <svg
-                          className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                          className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -295,10 +297,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                           <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z" />
                           <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
                         </svg>
-                        <span className="ml-3 flex-1 whitespace-nowrap">
+                        <span className="flex-1 ml-3 whitespace-nowrap">
                           Reports
                         </span>
-                        {/* <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
+                        {/* <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full">
                           Pro
                         </span> */}
                       </Link>
@@ -306,10 +308,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                     <li>
                       <Link
                         to="/users"
-                        className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group "
+                        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group "
                       >
                         <svg
-                          className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                          className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -320,18 +322,18 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="ml-3 flex-1 whitespace-nowrap">
+                        <span className="flex-1 ml-3 whitespace-nowrap">
                           Users
                         </span>
                       </Link>
                     </li>
                     <li>
                       <Link
-                        to="/"
-                        className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group "
+                        to="/settings"
+                        className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group "
                       >
                         <svg
-                          className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                          className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -342,19 +344,19 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             clipRule="evenodd"
                           />
                         </svg>
-                        <span className="ml-3 flex-1 whitespace-nowrap">
-                          Products
+                        <span className="flex-1 ml-3 whitespace-nowrap">
+                          Settings
                         </span>
                       </Link>
                     </li>
                   </ul>
-                  <div className="space-y-2 pt-2">
+                  {/* <div className="pt-2 space-y-2">
                     <Link
                       to="/"
-                      className="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2"
+                      className="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group"
                     >
                       <svg
-                        className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -367,26 +369,26 @@ export const Layout: React.FC<Props> = ({ children }) => {
                       </svg>
                       <span className="ml-3">Help</span>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </aside>
           <div
-            className="bg-gray-900 opacity-50 hidden fixed inset-0 z-10"
+            className="fixed inset-0 z-10 hidden bg-gray-900 opacity-50"
             id="sidebarBackdrop"
           />
           <div
             id="main-content"
-            className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+            className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64"
           >
             {children}
-            <footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
-              <ul className="flex items-center flex-wrap mb-6 md:mb-0">
+            <footer className="p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8">
+              <ul className="flex flex-wrap items-center mb-6 md:mb-0">
                 <li>
                   <Link
                     to="/"
-                    className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+                    className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
                   >
                     Terms and conditions
                   </Link>
@@ -394,7 +396,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 <li>
                   <Link
                     to="/"
-                    className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+                    className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
                   >
                     Privacy Policy
                   </Link>
@@ -402,7 +404,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 <li>
                   <Link
                     to="/"
-                    className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+                    className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
                   >
                     Licensing
                   </Link>
@@ -410,7 +412,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 <li>
                   <Link
                     to="/"
-                    className="text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6"
+                    className="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6"
                   >
                     Cookie Policy
                   </Link>
@@ -424,10 +426,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                   </Link>
                 </li>
               </ul>
-              <div className="flex sm:justify-center space-x-6">
+              <div className="flex space-x-6 sm:justify-center">
                 <a href="/" className="text-gray-500 hover:text-gray-900">
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -441,7 +443,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </a>
                 <Link to="/" className="text-gray-500 hover:text-gray-900">
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -455,7 +457,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </Link>
                 <Link to="/" className="text-gray-500 hover:text-gray-900">
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -465,7 +467,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </Link>
                 <Link to="/" className="text-gray-500 hover:text-gray-900">
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -479,7 +481,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </Link>
                 <Link to="#" className="text-gray-500 hover:text-gray-900">
                   <svg
-                    className="h-5 w-5"
+                    className="w-5 h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -493,10 +495,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 </Link>
               </div>
             </footer>
-            <p className="text-center text-sm text-gray-500 my-10">
+            <p className="my-10 text-sm text-center text-gray-500">
               © 2022{" "}
               <Link to="#" className="hover:underline">
-                9pol.dev{" "}
+                seetaidiamond.com{" "}
               </Link>
               All rights reserved.
             </p>

@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  SALESPERSON
+  GOLD
+  DIAMOND
+  FACTORY
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  name         String   @unique
+  email        String?  @unique
+  passwordHash String
+  role         Role     @default(SALESPERSON)
+  Order        Order[]
+}
+
+model Customer {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  //
+  name      String
+  phone     String
+  email     String
+  address   String
+  Order     Order[]
+}
+
+model Order {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  //
+  goldItems    GoldItem[]
+  diamondItems DiamondItem[]
+  //
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String        @db.ObjectId
+  //
+  Customer     Customer?     @relation(fields: [customerId], references: [id])
+  customerId   String?       @db.ObjectId
+}
+
+model GoldType {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  //
+  code      String     @unique
+  name      String
+  percent   Float
+  factor    Float
+  active    Boolean    @default(true)
+  GoldItem  GoldItem[]
+}
+
+model GoldVendor {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  //
+  code      String     @unique
+  name      String     @unique
+  active    Boolean    @default(true)
+  GoldItem  GoldItem[]
+}
+
+model DiamondType {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  //
+  code        String        @unique
+  name        String
+  active      Boolean       @default(true)
+  DiamondItem DiamondItem[]
+}
+
+model GoldItem {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  //
+  date         DateTime
+  pricePerBaht Float
+  weight       Float
+  //
+  type         GoldType   @relation(fields: [typeId], references: [id])
+  typeId       String     @db.ObjectId
+  //
+  vendor       GoldVendor @relation(fields: [vendorId], references: [id])
+  vendorId     String     @db.ObjectId
+  //
+  Order        Order?     @relation(fields: [orderId], references: [id])
+  orderId      String?    @db.ObjectId
+}
+
+model DiamondItem {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  //
+  date          DateTime
+  pricePerCarat Float ///
+  weight        Float ///
+  // DiamondFactoryType
+  type          DiamondType @relation(fields: [typeId], references: [id])
+  typeId        String      @db.ObjectId
+  Order         Order?      @relation(fields: [orderId], references: [id])
+  orderId       String?     @db.ObjectId
+}

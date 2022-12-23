@@ -1,6 +1,8 @@
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 export default function LoginForm() {
+  const validationErrors = useActionData();
+
   return (
     <div>
       {/* component */}
@@ -35,19 +37,20 @@ export default function LoginForm() {
                 </p>
               </div>
               <div className="mt-8">
-                <Form>
+                <Form method="post">
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="name"
                       className="block mb-2 text-sm text-gray-600 dark:text-gray-200"
                     >
-                      Email Address
+                      Username
                     </label>
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="example@example.com"
+                      type="text"
+                      name="name"
+                      id="name"
+                      value={"admin"}
+                      placeholder="Your Username"
                       className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
@@ -64,18 +67,29 @@ export default function LoginForm() {
                       type="password"
                       name="password"
                       id="password"
+                      value={"admin"}
                       placeholder="Your Password"
                       className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
                   <div className="mt-6">
-                    <Link to="/">
-                      <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                        Sign in
-                      </button>
-                    </Link>
+                    {/* <Link to="/"> */}
+                    <button
+                      type="submit"
+                      className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    >
+                      Sign in
+                    </button>
+                    {/* </Link> */}
                   </div>
                 </Form>
+                {validationErrors && (
+                  <ul className="mt-4 text-white">
+                    {Object.values(validationErrors).map((error: any) => (
+                      <li key={error}>{error}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
