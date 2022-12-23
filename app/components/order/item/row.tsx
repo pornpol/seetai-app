@@ -16,7 +16,7 @@ const OrderItemRow: React.FC<Props> = ({ item }) => {
           <div className="flex-shrink-0 w-10 h-10">
             <img
               className="w-full h-full rounded-full"
-              src={item.images[0]}
+              src={item.images.at(-1)}
               alt={item.seq}
             />
           </div>

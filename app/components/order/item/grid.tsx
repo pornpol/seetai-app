@@ -11,7 +11,7 @@ const OrderItemGrid: React.FC<Props> = ({ item }) => {
       <div className="p-4 rounded-lg shadow lg:flex hover:shadow-lg">
         <img
           className="object-cover w-full h-56 rounded-lg lg:w-48 lg:h-48"
-          src={item.images[0]}
+          src={item.images.at(-1)}
           alt="Article"
         />
         <div className="flex flex-col justify-between py-6 lg:mx-6">
