@@ -16,7 +16,7 @@ type Props = {
 
 const OrderList: React.FC<Props> = ({ orders }) => {
   const displayStyle: DisplayStyle = DisplayStyle.GRID;
-  const [style, setStyle] = useState(displayStyle);
+  const [style, setStyle] = useState<DisplayStyle>(displayStyle);
 
   return (
     <div>
@@ -82,13 +82,13 @@ const OrderList: React.FC<Props> = ({ orders }) => {
                   <thead>
                     <tr>
                       <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                        Name
+                        Seq
                       </th>
                       <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                        products
+                        Saleperson
                       </th>
                       <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                        Created at
+                        Customer
                       </th>
                       <th className="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
                         QRT

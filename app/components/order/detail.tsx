@@ -1,14 +1,16 @@
 type Props = {
-  order: {
-    id: string;
+  item: {
+    seq: string;
   }; // FIXME:
 };
 
-const OrderDetail: React.FC<Props> = ({ order }) => {
+const OrderDetail: React.FC<Props> = ({ item }) => {
   return (
-    <main>
-      <h1>Order {order.id}</h1>
-    </main>
+    <div className="w-full p-8 bg-white rounded-md">
+      <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+        Order # {item.seq}
+      </div>
+    </div>
   );
 };
 

@@ -127,5 +127,5 @@ export async function login({
     );
   }
 
-  return createUserSession(existingUser, "/");
+  return createUserSession(existingUser, "/orders");
 }
