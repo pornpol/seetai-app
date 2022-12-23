@@ -12,8 +12,8 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
           <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 lg:grid-cols-3">
             <div className="text-gray-600">
               <p className="mb-4 text-lg font-medium">Order # {item.seq}</p>
-              {/* <img src={item.images[0]} alt={item.seq}></img> */}
-              <Carousel images={item.images} />
+              <img src={item.images[0]} alt={item.seq}></img>
+              {/* <Carousel images={item.images} /> */}
             </div>
             <div className="lg:col-span-2">
               <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 md:grid-cols-5">
