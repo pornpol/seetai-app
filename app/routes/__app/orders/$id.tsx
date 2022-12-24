@@ -1,5 +1,7 @@
 import { useLoaderData } from "@remix-run/react";
-import OrderDetail from "~/components/order/detail";
+import OrderDetail, {
+  links as orderDetailLink,
+} from "~/components/order/detail";
 import { db } from "~/data/db.server";
 
 export default function OrderPage() {
@@ -28,4 +30,8 @@ export async function loader({
   });
 
   return { item };
+}
+
+export function links() {
+  return [...orderDetailLink()];
 }

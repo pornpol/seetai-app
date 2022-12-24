@@ -1,10 +1,16 @@
-import Carousel from "../shared/carousel";
+import { useState } from "react";
+import ImageGallery from "react-image-gallery";
+import styles from "react-image-gallery/styles/css/image-gallery.css";
+
+import Camera from "~/components/shared/camera";
 
 type Props = {
   item: any; // FIXME:
 };
 
 const OrderDetail: React.FC<Props> = ({ item }) => {
+  const [showCamera, setShowCamera] = useState<boolean>(false);
+
   return (
     <div className="w-full p-8 bg-white rounded-md">
       <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
@@ -12,8 +18,26 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
           <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 lg:grid-cols-3">
             <div className="text-gray-600">
               <p className="mb-4 text-lg font-medium">Order # {item.seq}</p>
-              <img src={item.images[0]} alt={item.seq}></img>
-              {/* <Carousel images={item.images} /> */}
+              {/* <img src={item.images.at(-1)} alt={item.seq}></img> */}
+              <ImageGallery
+                items={item.images.map((image: string) => ({
+                  original: image,
+                  thumbnail: image,
+                }))}
+                showBullets={true}
+              />
+              {<Camera showCamera={showCamera} setShowCamera={setShowCamera} />}
+              <div className="flex justify-center mt-4 space-x-8">
+                <button
+                  onClick={() => setShowCamera(true)}
+                  className="w-24 px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                >
+                  Add
+                </button>
+                <button className="w-24 px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700">
+                  Remove
+                </button>
+              </div>
             </div>
             <div className="lg:col-span-2">
               <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 md:grid-cols-5">
@@ -241,3 +265,7 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
 };
 
 export default OrderDetail;
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }];
+}
