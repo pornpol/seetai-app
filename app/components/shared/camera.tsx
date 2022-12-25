@@ -6,14 +6,30 @@ import { Dialog, Transition } from "@headlessui/react";
 type Props = {
   showCamera: boolean;
   setShowCamera: (showCamera: boolean) => void;
+  addImage: (image: any) => void;
 };
 
-const Component: React.FC<Props> = ({ showCamera, setShowCamera }) => {
+const Component: React.FC<Props> = ({
+  showCamera,
+  setShowCamera,
+  addImage,
+}) => {
   const camera = useRef<CameraType>(null);
   const [image, setImage] = useState<any>();
 
   const handleTakePhoto = () => {
     setImage(camera?.current?.takePhoto());
+  };
+
+  const handleUsePhoto = () => {
+    setShowCamera(false);
+    addImage(image);
+    setImage(null);
+  };
+
+  const handleCancel = () => {
+    setShowCamera(false);
+    setImage(null);
   };
 
   return (
@@ -47,12 +63,6 @@ const Component: React.FC<Props> = ({ showCamera, setShowCamera }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-xl p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
-                  Payment successful
-                </Dialog.Title> */}
                 <div className="mt-2">
                   <div className="w-full">
                     <div className="w-full">
@@ -80,9 +90,7 @@ const Component: React.FC<Props> = ({ showCamera, setShowCamera }) => {
                       <button
                         onClick={handleTakePhoto}
                         className="w-24 h-24 m-auto bg-gray-400 border-8 border-gray-200 rounded-full hover:bg-gray-500"
-                      >
-                        {/* {image ? "Retake photo" : "Take photo"} */}
-                      </button>
+                      ></button>
                     </div>
                   </div>
                 </div>
@@ -92,22 +100,16 @@ const Component: React.FC<Props> = ({ showCamera, setShowCamera }) => {
                     type="button"
                     disabled={!image}
                     className="w-48 px-4 py-2 font-bold text-white rounded enabled:bg-blue-500 enabled:hover:bg-blue-700 disabled:bg-blue-200"
-                    onClick={() => {
-                      setShowCamera(false);
-                      setImage(null);
-                    }}
+                    onClick={handleUsePhoto}
                   >
-                    Save & Close
+                    Use This Photo
                   </button>
                   <button
                     type="button"
                     className="w-48 px-4 py-2 font-bold text-white bg-red-500 rounded enabled:hover:bg-red-700"
-                    onClick={() => {
-                      setShowCamera(false);
-                      setImage(null);
-                    }}
+                    onClick={handleCancel}
                   >
-                    Cancel & Close
+                    Cancel
                   </button>
                 </div>
               </Dialog.Panel>
