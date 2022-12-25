@@ -5,7 +5,7 @@ import OrderDetail, {
 } from "~/components/order/detail";
 import { db } from "~/data/db.server";
 
-import { saveImage } from "~/data/order.server";
+import { saveImage, deleteImage } from "~/data/order.server";
 
 export default function OrderPage() {
   const { item } = useLoaderData();
@@ -46,19 +46,29 @@ export async function action({
   const formData = await request.formData();
   const body = Object.fromEntries(formData);
 
+  // current images
   const images = body.images.toString().split(",");
+  const dbImages = await db.order.findFirst({
+    where: {
+      id: id as string,
+    },
+    select: {
+      images: true,
+    },
+  });
+
+  dbImages?.images.forEach((image) => {
+    !images.includes(image) && deleteImage(image);
+  });
+
+  // new images
   const newImages = body.new_images
     .toString()
     .split("data:image/jpeg;base64,")
     .slice(1); // remove the first empty string
-
   const newImageUrls = newImages.map((image) => saveImage(image, id));
 
-  // console.log(id);
-  // console.log(images);
-  // console.log(newImages);
-  console.log(newImageUrls);
-
+  // update order
   await db.order.update({
     where: {
       id: id as string,

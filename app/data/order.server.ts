@@ -5,3 +5,7 @@ export const saveImage = (base64: string, id: string) => {
   fs.writeFileSync(fileName, base64, "base64");
   return fileName.replace("./public", "");
 };
+
+export const deleteImage = (path: string) => {
+  fs.unlinkSync(path.replace("/images", "./public/images"));
+};
