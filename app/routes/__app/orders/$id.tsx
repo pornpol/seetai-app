@@ -1,18 +1,19 @@
 import { redirect } from "@remix-run/node";
-import { useFormAction, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import OrderDetail, {
   links as orderDetailLink,
 } from "~/components/order/detail";
 import { db } from "~/data/db.server";
+import { Role } from "@prisma/client";
 
 import { saveImage, deleteImage } from "~/data/order.server";
 
 export default function OrderPage() {
-  const { item } = useLoaderData();
+  const { item, sales, customers } = useLoaderData();
 
   return (
     <main>
-      <OrderDetail item={item} />
+      <OrderDetail item={item} sales={sales} customers={customers} />
     </main>
   );
 }
@@ -30,9 +31,36 @@ export async function loader({
     where: {
       id: id as string,
     },
+    include: {
+      user: true,
+      customer: true,
+    },
   });
 
-  return { item };
+  const sales = await db.user.findMany({
+    where: {
+      role: Role.SALESPERSON,
+      // active: true,
+    },
+    select: {
+      id: true,
+      name: true,
+      active: true,
+    },
+  });
+
+  const customers = await db.customer.findMany({
+    where: {
+      active: true,
+    },
+    select: {
+      id: true,
+      name: true,
+      active: true,
+    },
+  });
+
+  return { item, sales, customers };
 }
 
 export async function action({
@@ -66,7 +94,7 @@ export async function action({
     .toString()
     .split("data:image/jpeg;base64,")
     .slice(1); // remove the first empty string
-  const newImageUrls = newImages.map((image) => saveImage(image, id));
+  const newImageUrls = newImages.map((image) => saveImage(image, id)); // TODO: s3
 
   // update order
   await db.order.update({
@@ -75,6 +103,13 @@ export async function action({
     },
     data: {
       images: [...images, ...newImageUrls],
+      description: body.description.toString(),
+      userId: body.userId.toString(),
+      customerId: body.customerId.toString(),
+      goldNote: body.goldNote.toString(),
+      diamondNote: body.diamondNote.toString(),
+      factoryListNote: body.factoryListNote.toString(),
+      factoryCostNote: body.factoryCostNote.toString(),
     },
   });
 

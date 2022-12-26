@@ -2,38 +2,48 @@ import { Form } from "@remix-run/react";
 import { useState, useRef, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
 import styles from "react-image-gallery/styles/css/image-gallery.css";
+import { Listbox } from "@headlessui/react";
 
 import Camera from "~/components/shared/camera";
 
 type Props = {
   item: any; // FIXME:
+  sales: any; // FIXME:
+  customers: any; // FIXME:
 };
 
-const OrderDetail: React.FC<Props> = ({ item }) => {
+const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
   const [showCamera, setShowCamera] = useState<boolean>(false);
-  const [currentImage, setCurrentImage] = useState<string[]>(item.images);
-  const [newImages, setNewImages] = useState<string[]>([]);
+
+  const [currentImages, setCurrentImages] = useState<string[]>(item.images);
+  const [tempImages, setTempImages] = useState<string[]>([]);
+  // const [newItem, setNewItem] = useState<any>(item); // FIXME:
+
   const refImg = useRef<any>(null);
 
+  // console.log(item);
+  // console.log(sales);
+  // console.log(customers);
+
   const handleAddImage = (image: any) => {
-    setNewImages([...newImages, image]);
+    setTempImages([...tempImages, image]);
   };
 
   const handleRemoveImage = () => {
-    const currentImageLength = currentImage.length;
-    const newImageLength = newImages.length;
-    const totalLength = currentImageLength + newImageLength;
+    const currentImageLength = currentImages.length;
+    const tempImageLength = tempImages.length;
+    const totalLength = currentImageLength + tempImageLength;
 
     // reverse index because of react-image-gallery reverse image
     const currentIndex = totalLength - 1 - refImg?.current?.getCurrentIndex();
 
     if (currentIndex < currentImageLength) {
-      setCurrentImage(
-        currentImage.filter((_, index) => index !== currentIndex)
+      setCurrentImages(
+        currentImages.filter((_: any, index: any) => index !== currentIndex)
       );
     } else {
-      setNewImages(
-        newImages.filter(
+      setTempImages(
+        tempImages.filter(
           (_, index) => index !== currentIndex - currentImageLength
         )
       );
@@ -49,11 +59,11 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
               <p className="mb-4 text-lg font-medium">Order # {item.seq}</p>
               <ImageGallery
                 ref={refImg}
-                items={[...currentImage, ...newImages]
+                items={[...currentImages, ...tempImages]
                   .reverse()
                   .map((image: string) => ({
                     original: image,
-                    thumbnail: image,
+                    // thumbnail: image,
                   }))}
                 showBullets={true}
               />
@@ -86,47 +96,131 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
                     id="images"
                     name={"images"}
                     type="hidden"
-                    value={currentImage}
+                    value={currentImages}
                   />
                   <input
                     id="new_images"
                     name="new_images"
                     type="hidden"
-                    value={newImages}
+                    value={tempImages}
                   />
-                  <div className="md:col-span-5">
-                    <label htmlFor="full_name">Full Name</label>
-                    <input
-                      type="text"
-                      name="full_name"
-                      id="full_name"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
-                      // defaultValue
-                    />
+
+                  <div className="mt-6 -mb-2 text-lg font-medium text-gray-600 lg:mt-0">
+                    Information
                   </div>
                   <div className="md:col-span-5">
-                    <label htmlFor="email">Email Address</label>
+                    <label htmlFor="description">Description</label>
                     <input
                       type="text"
-                      name="email"
-                      id="email"
+                      name="description"
+                      id="description"
                       className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
-                      // defaultValue
-                      placeholder="email@domain.com"
-                    />
-                  </div>
-                  <div className="md:col-span-3">
-                    <label htmlFor="address">Address / Street</label>
-                    <input
-                      type="text"
-                      name="address"
-                      id="address"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
-                      // defaultValue
-                      // placeholder
+                      defaultValue={item.description}
                     />
                   </div>
                   <div className="md:col-span-2">
+                    <label htmlFor="sale">Saleperson</label>
+                    <select
+                      name="userId"
+                      id="userId"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.userId}
+                      // placeholder="email@domain.com"
+                      // onChange={handleFormChange}
+                    >
+                      {sales.map((sale: any) => (
+                        <option
+                          key={sale.id}
+                          value={sale.id}
+                          disabled={!sale.active}
+                        >
+                          {sale.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="md:col-span-3">
+                    <label htmlFor="customer">Customer</label>
+                    <select
+                      name="customerId"
+                      id="customerId"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.customerId}
+                      // placeholder="email@domain.com"
+                      // onChange={handleFormChange}
+                    >
+                      {customers.map((cust: any) => (
+                        <option
+                          key={cust.id}
+                          value={cust.id}
+                          disabled={!cust.active}
+                        >
+                          {cust.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* <div className="mt-2 mb-1 border-2 border-b-gray-300 border-t-white md:col-span-5 round" /> */}
+
+                  <div className="mt-6 -mb-2 text-lg font-medium text-gray-600">
+                    Gold
+                  </div>
+                  <div className="md:col-span-5">
+                    <label htmlFor="description">Note</label>
+                    <input
+                      type="text"
+                      name="goldNote"
+                      id="goldNote"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.goldNote}
+                    />
+                  </div>
+
+                  {/* <div className="mt-1 border-2 border-b-gray-300 border-t-white md:col-span-5 round" /> */}
+
+                  <div className="mt-6 -mb-2 text-lg font-medium text-gray-600">
+                    Diamond
+                  </div>
+                  <div className="md:col-span-5">
+                    <label htmlFor="description">Note</label>
+                    <input
+                      type="text"
+                      name="diamondNote"
+                      id="diamondNote"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.diamondNote}
+                    />
+                  </div>
+
+                  <div className="mt-6 -mb-2 text-lg font-medium text-gray-600">
+                    Factory (list)
+                  </div>
+                  <div className="md:col-span-5">
+                    <label htmlFor="description">Note</label>
+                    <input
+                      type="text"
+                      name="factoryListNote"
+                      id="factoryListNote"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.factoryListNote}
+                    />
+                  </div>
+
+                  <div className="mt-6 -mb-2 text-lg font-medium text-gray-600">
+                    Factory (cost)
+                  </div>
+                  <div className="md:col-span-5">
+                    <label htmlFor="description">Note</label>
+                    <input
+                      type="text"
+                      name="factoryCostNote"
+                      id="factoryCostNote"
+                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      defaultValue={item.factoryCostNote}
+                    />
+                  </div>
+                  {/* <div className="md:col-span-2">
                     <label htmlFor="city">City</label>
                     <input
                       type="text"
@@ -136,8 +230,8 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
                       // defaultValue
                       // placeholder
                     />
-                  </div>
-                  <div className="md:col-span-2">
+                  </div> */}
+                  {/* <div className="md:col-span-2">
                     <label htmlFor="country">Country / region</label>
                     <div className="flex items-center h-10 mt-1 border border-gray-200 rounded bg-gray-50">
                       <input
@@ -300,8 +394,8 @@ const OrderDetail: React.FC<Props> = ({ item }) => {
                         </svg>
                       </button>
                     </div>
-                  </div>
-                  <div className="text-right md:col-span-5">
+                  </div> */}
+                  <div className="mt-6 text-right md:col-span-5">
                     <div className="inline-flex items-end">
                       <button
                         type="submit"
