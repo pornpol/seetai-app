@@ -1,5 +1,5 @@
 import { Form } from "@remix-run/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import ImageGallery from "react-image-gallery";
 import styles from "react-image-gallery/styles/css/image-gallery.css";
 // import { Listbox, Disclosure } from "@headlessui/react";
@@ -7,6 +7,7 @@ import styles from "react-image-gallery/styles/css/image-gallery.css";
 import Disclosure from "~/components/shared/disclosure";
 
 import Camera from "~/components/shared/camera";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   item: any; // FIXME:
@@ -19,13 +20,10 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
 
   const [currentImages, setCurrentImages] = useState<string[]>(item.images);
   const [tempImages, setTempImages] = useState<string[]>([]);
-  // const [newItem, setNewItem] = useState<any>(item); // FIXME:
 
   const refImg = useRef<any>(null);
 
-  // console.log(item);
-  // console.log(sales);
-  // console.log(customers);
+  let { t } = useTranslation(["order", "common"]);
 
   const handleAddImage = (image: any) => {
     setTempImages([...tempImages, image]);
@@ -54,11 +52,11 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
 
   return (
     <div className="w-full p-8 bg-white rounded-md">
-      {/* <div className="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8"> */}
-      {/* <div className="p-4 px-4 mb-6 bg-white rounded shadow-lg md:p-8"> */}
-      <p className="mb-4 text-lg font-medium">Order # {item.seq}</p>
-      <div className="grid grid-cols-1 gap-8 text-sm gap-y-2 lg:grid-cols-3">
-        <div className="text-gray-600">
+      <p className="mb-4 text-lg font-medium">
+        {`${t("order", { ns: "order" })} # ${item.seq}`}
+      </p>
+      <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 lg:grid-cols-3">
+        <div className="p-4 text-gray-600 rounded-lg shadow">
           <ImageGallery
             ref={refImg}
             items={[...currentImages, ...tempImages]
@@ -81,13 +79,13 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
               onClick={() => setShowCamera(true)}
               className="w-24 px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
             >
-              Add
+              {t("add", { ns: "common" })}
             </button>
             <button
               onClick={handleRemoveImage}
               className="w-24 px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
             >
-              Remove
+              {t("delete", { ns: "common" })}
             </button>
           </div>
         </div>
@@ -107,25 +105,29 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
               value={tempImages}
             />
 
-            <div className="flex flex-col mt-4 space-y-8 lg:mt-0">
-              <Disclosure topic="Order Detail">
+            <div className="flex flex-col p-4 mt-4 space-y-4 rounded-lg shadow lg:mt-0">
+              <Disclosure topic={t("orderDetail", { ns: "order" })}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                   <div className="md:col-span-4">
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">
+                      {t("description", { ns: "order" })}
+                    </label>
                     <input
                       type="text"
                       name="description"
                       id="description"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      className="w-full h-10 px-4 mt-1 border rounded"
                       defaultValue={item.description}
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label htmlFor="sale">Saleperson</label>
+                    <label htmlFor="sale">
+                      {t("saleperson", { ns: "order" })}
+                    </label>
                     <select
                       name="userId"
                       id="userId"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      className="w-full h-10 px-4 mt-1 border rounded "
                       defaultValue={item.userId}
                     >
                       {sales.map((sale: any) => (
@@ -140,11 +142,13 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
                     </select>
                   </div>
                   <div className="md:col-span-2">
-                    <label htmlFor="customer">Customer</label>
+                    <label htmlFor="customer">
+                      {t("customer", { ns: "order" })}
+                    </label>
                     <select
                       name="customerId"
                       id="customerId"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      className="w-full h-10 px-4 mt-1 border rounded "
                       defaultValue={item.customerId}
                     >
                       {customers.map((cust: any) => (
@@ -161,55 +165,63 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
                 </div>
               </Disclosure>
 
-              <Disclosure topic="Gold">
+              <Disclosure topic={t("gold", { ns: "order" })}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                   <div className="md:col-span-4">
-                    <label htmlFor="description">Note</label>
+                    <label htmlFor="description">
+                      {t("note", { ns: "order" })}
+                    </label>
                     <input
                       type="text"
                       name="goldNote"
                       id="goldNote"
-                      className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                      className="w-full h-10 px-4 mt-1 border rounded "
                       defaultValue={item.goldNote}
                     />
                   </div>
                 </div>
               </Disclosure>
 
-              <Disclosure topic="Diamond">
+              <Disclosure topic={t("diamond", { ns: "order" })}>
                 <div className="md:col-span-4">
-                  <label htmlFor="description">Note</label>
+                  <label htmlFor="description">
+                    {t("note", { ns: "order" })}
+                  </label>
                   <input
                     type="text"
                     name="diamondNote"
                     id="diamondNote"
-                    className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                    className="w-full h-10 px-4 mt-1 border rounded "
                     defaultValue={item.diamondNote}
                   />
                 </div>
               </Disclosure>
 
-              <Disclosure topic="Factory (list)">
+              <Disclosure topic={t("factoryList", { ns: "order" })}>
                 <div className="md:col-span-4">
-                  <label htmlFor="description">Note</label>
+                  <label htmlFor="description">
+                    {t("note", { ns: "order" })}
+                  </label>
                   <input
                     type="text"
                     name="factoryListNote"
                     id="factoryListNote"
-                    className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                    className="w-full h-10 px-4 mt-1 border rounded "
                     defaultValue={item.factoryListNote}
                   />
                 </div>
               </Disclosure>
 
-              <Disclosure topic="Factory (Cost)">
+              <Disclosure topic={t("factoryCost", { ns: "order" })}>
                 <div className="md:col-span-4">
-                  <label htmlFor="description">Note</label>
+                  <label htmlFor="description">
+                    {t("note", { ns: "order" })}
+                  </label>
                   <input
                     type="text"
                     name="factoryCostNote"
                     id="factoryCostNote"
-                    className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
+                    className="w-full h-10 px-4 mt-1 border rounded "
                     defaultValue={item.factoryCostNote}
                   />
                 </div>
@@ -221,7 +233,7 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
                     type="submit"
                     className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                   >
-                    Submit
+                    {t("save", { ns: "common" })}
                   </button>
                 </div>
               </div>
@@ -230,8 +242,6 @@ const OrderDetail: React.FC<Props> = ({ item, sales, customers }) => {
         </div>
       </div>
     </div>
-    // </div>
-    // </div>
   );
 };
 

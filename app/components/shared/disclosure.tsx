@@ -16,12 +16,12 @@ const Component: React.FC<Props> = ({
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus-visible:ring focus-visible:ring-blue-700 focus-visible:ring-opacity-75">
+          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-500 bg-gray-200 border-gray-500 rounded-lg border-1 focus-visible:ring hover:shadow-lg">
             <span>{topic}</span>
             <BsChevronUp
               className={`${
                 open ? "rotate-180 transform" : ""
-              } h-5 w-5 text-white`}
+              } h-5 w-5 text-gray-500`}
             />
           </Disclosure.Button>
           <Disclosure.Panel className="px-4 pb-2 text-sm">

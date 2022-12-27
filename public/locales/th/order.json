@@ -1,0 +1,18 @@
+{
+  "order": "รายการ",
+  "orders": "รายการทั้งหมด",
+  "orderDetail": "รายละเอียดรายการ",
+  "gold": "ทอง",
+  "diamond": "เพชร",
+  "factory": "โรงงาน",
+  "factoryList": "โรงงาน (รายการสั่งทำ)",
+  "factoryCost": "โรงงาน (ค่าใช้จ่าย)",
+  "note": "หมายเหตุ",
+  "description": "รายละเอียด",
+  "saleperson": "พนักงานขาย",
+  "customer": "ลูกค้า",
+  "price": "ราคา",
+  "total": "รวม",
+  "totalPrice": "ราคารวม",
+  "totalCost": "ราคาทั้งหมด"
+}
