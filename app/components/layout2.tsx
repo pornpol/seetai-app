@@ -22,7 +22,7 @@ export const Layout: React.FC<Props> = ({ children, user }) => {
                 aria-expanded="true"
                 aria-controls="sidebar"
                 onClick={() => setShow(!show)}
-                className="p-2 mr-2 text-gray-600 rounded cursor-pointer xl:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100"
+                className="p-2 mr-2 text-gray-600 rounded cursor-pointer xl:hidden hover:text-gray-900 hover:bg-blue-100 focus:bg-blue-100 focus:ring-2 focus:ring-blue-100"
               >
                 <svg
                   id="toggleSidebarMobileHamburger"
