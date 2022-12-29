@@ -1,5 +1,5 @@
 export default {
-  debug: process.env.NODE_ENV !== "production",
+  // debug: process.env.NODE_ENV !== "production",
   // This is the list of languages your application supports
   supportedLngs: ["en", "th"],
   // This is the language you want to use in case

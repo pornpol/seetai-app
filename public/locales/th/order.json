@@ -14,5 +14,7 @@
   "price": "ราคา",
   "total": "รวม",
   "totalPrice": "ราคารวม",
-  "totalCost": "ราคาทั้งหมด"
+  "totalCost": "ราคาทั้งหมด",
+  "goldItems": "รายการทอง",
+  "goldType": "ประเภททอง"
 }

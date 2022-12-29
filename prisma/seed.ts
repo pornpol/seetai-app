@@ -49,15 +49,26 @@ async function seed() {
     ],
   });
 
-  await db.customer.createMany({
-    data: [
-      {
-        name: "customer1",
+  await db.customer.create({
+    data: {
+      name: "customer1",
+      user: {
+        connect: {
+          name: "sale1",
+        },
       },
-      {
-        name: "customer2",
+    },
+  });
+
+  await db.customer.create({
+    data: {
+      name: "customer2",
+      user: {
+        connect: {
+          name: "sale2",
+        },
       },
-    ],
+    },
   });
 
   await db.order.create({
@@ -65,11 +76,11 @@ async function seed() {
       seq: 1,
       images: ["/images/orders/order1.jpg"],
       status: OrderStatus.OPEN,
-      user: {
-        connect: {
-          name: "sale1",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale1",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer1",
@@ -83,11 +94,11 @@ async function seed() {
       seq: 2,
       images: ["/images/orders/order2.jpg"],
       status: OrderStatus.OPEN,
-      user: {
-        connect: {
-          name: "sale2",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale2",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer2",
@@ -101,11 +112,11 @@ async function seed() {
       seq: 3,
       images: ["/images/orders/order3.jpg"],
       status: OrderStatus.WIP,
-      user: {
-        connect: {
-          name: "sale1",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale1",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer1",
@@ -119,11 +130,11 @@ async function seed() {
       seq: 4,
       images: ["/images/orders/order4.jpg"],
       status: OrderStatus.COMPLETED,
-      user: {
-        connect: {
-          name: "sale2",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale2",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer2",
@@ -137,11 +148,11 @@ async function seed() {
       seq: 5,
       images: ["/images/orders/order5.jpg"],
       status: OrderStatus.CANCELLED,
-      user: {
-        connect: {
-          name: "sale1",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale1",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer1",
@@ -155,11 +166,11 @@ async function seed() {
       seq: 6,
       images: ["/images/orders/order6.jpg"],
       status: OrderStatus.PAID,
-      user: {
-        connect: {
-          name: "sale2",
-        },
-      },
+      // user: {
+      //   connect: {
+      //     name: "sale2",
+      //   },
+      // },
       customer: {
         connect: {
           name: "customer2",

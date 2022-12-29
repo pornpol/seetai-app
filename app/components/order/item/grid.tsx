@@ -25,7 +25,7 @@ const OrderItemGrid: React.FC<Props> = ({ item }) => {
           </div>
           <div className="flex flex-col">
             <span className="text-sm text-gray-500">
-              Sale: {item.user.name}
+              Sale: {item.customer.user.name}
             </span>
             <span className="text-sm text-gray-500">
               Cust: {item.customer.name}

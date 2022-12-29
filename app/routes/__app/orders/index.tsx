@@ -15,14 +15,19 @@ export default function OrdersPage() {
 export async function loader({ request }: { request: Request }) {
   const orders = await db.order.findMany({
     include: {
-      user: {
-        select: {
-          name: true,
-        },
-      },
+      // user: {
+      //   select: {
+      //     name: true,
+      //   },
+      // },
       customer: {
         select: {
           name: true,
+          user: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
     },
