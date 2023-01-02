@@ -4,13 +4,27 @@ import Blade from "~/components/shared/blade";
 
 type Props = {
   item: any;
+  checkedItems: string[];
+  setCheckedItems: any;
 };
 
-const OrderItemRow: React.FC<Props> = ({ item }) => {
+const OrderItemRow: React.FC<Props> = ({
+  item,
+  checkedItems,
+  setCheckedItems,
+}) => {
   const navigate = useNavigate();
 
   return (
     <tr onClick={() => navigate(`/orders/${item.id}`)}>
+      <td
+        className="text-center bg-white border-b border-gray-200"
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      >
+        <input type="checkbox" name="" id="" />
+      </td>
       <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
         <div className="flex items-center">
           <div className="flex-shrink-0 w-10 h-10">

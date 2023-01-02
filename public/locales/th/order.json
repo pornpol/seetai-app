@@ -12,9 +12,11 @@
   "saleperson": "พนักงานขาย",
   "customer": "ลูกค้า",
   "price": "ราคา",
+  "weight": "น้ำหนัก",
   "total": "รวม",
   "totalPrice": "ราคารวม",
   "totalCost": "ราคาทั้งหมด",
   "goldItems": "รายการทอง",
-  "goldType": "ประเภททอง"
+  "goldType": "ประเภททอง",
+  "goldVendor": "ผู้ขายทอง"
 }

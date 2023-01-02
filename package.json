@@ -27,6 +27,8 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
     "express": "^4.18.2",
+    "flowbite": "^1.5.5",
+    "flowbite-react": "^0.3.7",
     "http-errors": "^2.0.0",
     "i18next": "^22.4.6",
     "i18next-browser-languagedetector": "^7.0.1",

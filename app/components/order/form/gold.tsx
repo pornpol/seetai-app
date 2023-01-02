@@ -61,7 +61,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                     defaultValue={dayjs().format("YYYY-MM-DD")}
                   /> */}
                     <DatePicker
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 border border-gray-200 rounded"
                       selected={effDate[index]}
                       onChange={(newDate: Date) => {
                         console.log(newDate);
@@ -78,7 +78,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                       type="text"
                       name="price"
                       id="price"
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
                       // defaultValue={20000}
                       placeholder={t("price") ?? "Price"}
                     />
@@ -89,7 +89,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                       type="text"
                       name="weight"
                       id="weight"
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
                       // defaultValue={index}
                       placeholder={t("weight") ?? "Weight"}
                     />
@@ -100,7 +100,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                       type="text"
                       name="goldType"
                       id="goldType"
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
                       // defaultValue={"18k"}
                       placeholder={t("goldType") ?? "Type"}
                     />
@@ -111,7 +111,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                       type="text"
                       name="goldType"
                       id="goldType"
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
                       // defaultValue={"18k"}
                       placeholder={t("goldVendor") ?? "Vendor"}
                     />
@@ -122,7 +122,7 @@ const Gold: React.FC<Props> = ({ note }) => {
                       type="text"
                       name="cost"
                       id="cost"
-                      className="w-full h-10 px-4 mt-1 border rounded "
+                      className="w-full h-10 px-4 mt-1 text-gray-500 bg-gray-100 border border-gray-200 rounded"
                       defaultValue={0}
                       // TODO: calculate cost
                       // placeholder="Cost"
@@ -140,7 +140,7 @@ const Gold: React.FC<Props> = ({ note }) => {
             type="text"
             name="goldNote"
             id="goldNote"
-            className="w-full h-10 px-4 mt-1 border rounded "
+            className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
             defaultValue={note}
           />
         </div>

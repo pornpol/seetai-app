@@ -47,16 +47,20 @@ const Image: React.FC<Props> = ({ images }) => {
 
   return (
     <>
-      <ImageGallery
-        ref={refImg}
-        items={[...currentImages, ...tempImages]
-          .reverse()
-          .map((image: string) => ({
-            original: image,
-            // thumbnail: image,
-          }))}
-        showBullets={true}
-      />
+      {/* {currentImages.length !== 0 && tempImages.length !== 0 && ( */}
+      <div hidden={currentImages.length === 0 && tempImages.length === 0}>
+        <ImageGallery
+          ref={refImg}
+          items={[...currentImages, ...tempImages]
+            .reverse()
+            .map((image: string) => ({
+              original: image,
+              // thumbnail: image,
+            }))}
+          showBullets={true}
+        />
+      </div>
+      {/* )} */}
       {
         <Camera
           showCamera={showCamera}

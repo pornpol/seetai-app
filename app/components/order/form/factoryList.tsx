@@ -17,7 +17,7 @@ const FactoryList: React.FC<Props> = ({ note }) => {
             type="text"
             name="factoryListNote"
             id="factoryListNote"
-            className="w-full h-10 px-4 mt-1 border rounded "
+            className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
             defaultValue={note}
           />
         </div>

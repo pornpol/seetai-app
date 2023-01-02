@@ -24,7 +24,7 @@ const Info: React.FC<Props> = ({ desc, customer, customers }) => {
             type="text"
             name="description"
             id="description"
-            className="w-full h-10 px-4 mt-1 border rounded"
+            className="w-full h-10 px-4 mt-1 border border-gray-200 rounded"
             defaultValue={desc}
           />
         </div>
@@ -33,14 +33,17 @@ const Info: React.FC<Props> = ({ desc, customer, customers }) => {
           <select
             name="customerId"
             id="customerId"
-            className="w-full h-10 px-4 mt-1 border rounded"
-            defaultValue={customer.id}
+            className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
+            defaultValue={customer?.id}
             onChange={(e) => {
               refSale.current.value = customers.find(
                 (cust: any) => cust.id === e.target.value
               ).user.name;
             }}
           >
+            {/* <option disabled selected>
+              -- {t("customer")} --
+            </option> */}
             {customers.map((cust: any) => (
               <option key={cust.id} value={cust.id} disabled={!cust.active}>
                 {cust.name}
@@ -55,8 +58,8 @@ const Info: React.FC<Props> = ({ desc, customer, customers }) => {
             type="text"
             // name="userId"
             // id="userId"
-            className="w-full h-10 px-4 mt-1 rounded"
-            defaultValue={customer.user.name}
+            className="w-full h-10 px-4 mt-1 text-gray-500 bg-gray-100 border-gray-200 rounded"
+            defaultValue={customer?.user.name ?? customers[0]?.user.name}
             // value={refCustomer.current?.value}
             disabled
           />

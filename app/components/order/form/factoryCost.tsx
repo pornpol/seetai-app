@@ -17,7 +17,7 @@ const FactoryCost: React.FC<Props> = ({ note }) => {
             type="text"
             name="factoryCostNote"
             id="factoryCostNote"
-            className="w-full h-10 px-4 mt-1 border rounded "
+            className="w-full h-10 px-4 mt-1 border border-gray-200 rounded "
             defaultValue={note}
           />
         </div>

@@ -7,5 +7,9 @@ export const saveImage = (base64: string, id: string) => {
 };
 
 export const deleteImage = (path: string) => {
-  fs.unlinkSync(path.replace("/images", "./public/images"));
+  try {
+    fs.unlinkSync(path.replace("/images", "./public/images"));
+  } catch (error) {
+    console.log(error);
+  }
 };

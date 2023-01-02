@@ -9,6 +9,7 @@ import DiamondForm from "./form/diamond";
 import FactoryCostForm from "./form/factoryCost";
 import FactoryListForm from "./form/factoryList";
 import ImagesForm, { styles as imageStyles } from "./form/image";
+import { useEffect, useState } from "react";
 
 type Props = {
   item: any; // FIXME:
@@ -20,26 +21,23 @@ const OrderDetail: React.FC<Props> = ({ item, customers }) => {
   const { t } = useTranslation(["order", "common"]);
 
   return (
-    <div className="w-full p-8 bg-white rounded-md">
-      <p className="mb-4 text-lg font-medium">
-        {`${t("order", { ns: "order" })} # ${item.seq}`}
-      </p>
-      <Form method="put">
+    <>
+      <Form method={item?.id ? "put" : "post"}>
         <div className="grid grid-cols-1 gap-4 text-sm gap-y-2 lg:grid-cols-3">
           <div className="p-4 rounded-lg shadow">
-            <ImagesForm images={item.images} />
+            <ImagesForm images={item?.images} />
           </div>
 
           <div className="flex flex-col p-4 mt-4 space-y-4 rounded-lg shadow lg:col-span-2 lg:mt-0">
             <InfoForm
-              desc={item.description}
+              desc={item?.description}
               customers={customers}
-              customer={item.customer}
+              customer={item?.customer}
             />
-            <GoldForm note={item.goldNote} />
-            <DiamondForm note={item.diamondNote} />
-            <FactoryListForm note={item.factoryListNote} />
-            <FactoryCostForm note={item.factoryCostNote} />
+            <GoldForm note={item?.goldNote} />
+            <DiamondForm note={item?.diamondNote} />
+            <FactoryListForm note={item?.factoryListNote} />
+            <FactoryCostForm note={item?.factoryCostNote} />
 
             <div className="ml-auto">
               <Button type="submit" color="blue" className="w-24">
@@ -49,7 +47,7 @@ const OrderDetail: React.FC<Props> = ({ item, customers }) => {
           </div>
         </div>
       </Form>
-    </div>
+    </>
   );
 };
 

@@ -3,9 +3,15 @@ import Blade from "~/components/shared/blade";
 
 type Props = {
   item: any;
+  checkedItems: string[];
+  setCheckedItems: any;
 };
 
-const OrderItemGrid: React.FC<Props> = ({ item }) => {
+const OrderItemGrid: React.FC<Props> = ({
+  item,
+  checkedItems,
+  setCheckedItems,
+}) => {
   return (
     <Link to={`/orders/${item.id}`}>
       <div className="p-4 rounded-lg shadow lg:flex hover:shadow-lg">
@@ -14,14 +20,24 @@ const OrderItemGrid: React.FC<Props> = ({ item }) => {
           src={item.images.at(-1)}
           alt="Article"
         />
-        <div className="flex flex-col justify-between lg:mx-6">
+        <div className="flex flex-col justify-between w-full mt-2 lg:ml-6 lg:mt-0">
           <div className="flex flex-col mb-4">
-            <span className="text-xl font-semibold text-gray-800">
-              # {item.seq}
-            </span>
-            <span className="text-sm italic font-semibold text-gray-500 indent-5">
+            <div className="flex justify-between">
+              <div className="text-xl font-semibold text-gray-800">
+                # {item.seq}
+              </div>
+
+              <input
+                type="checkbox"
+                className="p-3"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              />
+            </div>
+            <div className="text-sm italic font-semibold text-gray-500 indent-5">
               {item.description}
-            </span>
+            </div>
           </div>
           <div className="flex flex-col">
             <span className="text-sm text-gray-500">
