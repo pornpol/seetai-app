@@ -19,11 +19,25 @@ const OrderItemRow: React.FC<Props> = ({
     <tr onClick={() => navigate(`/orders/${item.id}`)}>
       <td
         className="text-center bg-white border-b border-gray-200"
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
+        // onClick={(event) => {
+        //   event.stopPropagation();
+        // }}
       >
-        <input type="checkbox" name="" id="" />
+        <input
+          className="p-3"
+          type="checkbox"
+          // name=""
+          // id=""
+          checked={checkedItems.includes(item.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (checkedItems.includes(item.id)) {
+              setCheckedItems(checkedItems.filter((id) => id !== item.id));
+            } else {
+              setCheckedItems([...checkedItems, item.id]);
+            }
+          }}
+        />
       </td>
       <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
         <div className="flex items-center">

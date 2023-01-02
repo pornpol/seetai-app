@@ -51,7 +51,7 @@ const OrderList: React.FC<Props> = ({ orders }) => {
                 navigate("/orders/new");
               }}
             >
-              Create
+              สร้าง
             </button>
           </div>
         </div>
@@ -67,6 +67,7 @@ const OrderList: React.FC<Props> = ({ orders }) => {
                 inline={true}
                 size="sm"
               >
+                <Dropdown.Item>ผลิตอีกครั้ง</Dropdown.Item>
                 <Dropdown.Item>ลบรายการ</Dropdown.Item>
                 <Dropdown.Item>สร้างใบสั่งงาน</Dropdown.Item>
                 <Dropdown.Item>สร้างใบแจ้งหนี้</Dropdown.Item>
@@ -100,6 +101,7 @@ const OrderList: React.FC<Props> = ({ orders }) => {
                   key={item.id}
                   item={item}
                   checkedItems={checkedItems}
+                  setCheckedItems={setCheckedItems}
                 />
               ))}
             </div>
@@ -133,6 +135,7 @@ const OrderList: React.FC<Props> = ({ orders }) => {
                       key={item.id}
                       item={item}
                       checkedItems={checkedItems}
+                      setCheckedItems={setCheckedItems}
                     />
                   ))}
                 </tbody>

@@ -26,12 +26,19 @@ const OrderItemGrid: React.FC<Props> = ({
               <div className="text-xl font-semibold text-gray-800">
                 # {item.seq}
               </div>
-
               <input
                 type="checkbox"
                 className="p-3"
+                checked={checkedItems.includes(item.id)}
                 onClick={(e) => {
                   e.stopPropagation();
+                  if (checkedItems.includes(item.id)) {
+                    setCheckedItems(
+                      checkedItems.filter((id) => id !== item.id)
+                    );
+                  } else {
+                    setCheckedItems([...checkedItems, item.id]);
+                  }
                 }}
               />
             </div>
